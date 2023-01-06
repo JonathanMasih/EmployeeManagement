@@ -1,11 +1,11 @@
 import React, {useEffect , useState}from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import EmployeeService from '../services/EmployeeService';
 
 
 const UpdateEmployee = () => {
-
-   const { id } = useParams();
+    const { id } = useParams();   
+   const navigate = useNavigate();
    const [employee, setEmployee] = useState({
         id: id,
         firstName: "",
@@ -30,11 +30,16 @@ const UpdateEmployee = () => {
     };
     fetchData();
    }, [])
-   
 
     const updateEmployee = (e)=>{
         e.preventDefault();
-   
+        EmployeeService.updateEmployee(employee,id)
+        .then((response) => {
+            navigate("/employeeList")
+        })
+        .catch((error) =>{
+            console.log(error)
+        });
     }
 
   return (
@@ -77,6 +82,7 @@ const UpdateEmployee = () => {
                 Update
             </button>
             <button 
+                onClick={()=>navigate("/employeeList")}
                 className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6">
                 Cancel
             </button>
