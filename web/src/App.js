@@ -1,14 +1,23 @@
 
+import {BrowserRouter, Route, Routes} from "react-router-dom"
 import './App.css';
-import AddEmpolyee from './components/AddEmpolyee';
+import AddEmployee from './components/AddEmployee';
+import EmployeeList from "./components/EmployeeList";
 import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div>
-      <Navbar/>
-      <AddEmpolyee/>
-    </div>
+    <>
+      <BrowserRouter>
+        <Navbar/>
+        <Routes>
+          <Route index path="/employee" element={<EmployeeList/>}/>
+          <Route path="/" element={ <EmployeeList/>}></Route>
+          <Route path="/employeeList" element={<EmployeeList/>}/>
+          <Route path="/addEmployee" element={<AddEmployee/>}/>
+        </Routes>
+      </BrowserRouter> 
+    </>
   );
 }
 
