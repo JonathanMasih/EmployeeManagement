@@ -9,6 +9,9 @@ class EmployeeService{
         return axios.post(EMPLOYEE_API_BASE,employee);
     }
 
+    getEmplyees(){
+        return axios.get(EMPLOYEE_API_BASE);
+    }
 }
 
 export default new EmployeeService();
